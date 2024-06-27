@@ -27,14 +27,14 @@ public class main {
     boolean on_or_off = false;
     boolean isMute = true;
     String gun = "杜绝收费，从你我做起,GitHub点点星星，谢谢";
-    File from = new File("Script.lua");
-    File to = new File("C:\\Users\\Public\\Downloads\\Script.lua");
+    File from = new File("C:/Users/lyl/Desktop/test/Script.lua");
+    File to = new File("C:/Users/lyl/Desktop/test/Script.lua");
 
-    File control = new File("C:\\Users\\Public\\Downloads\\main.lua");
+    File control = new File("C:/Users/lyl/Desktop/test/main.lua");
 
-    File thermiteControl = new File("C:\\Users\\Public\\Downloads\\thermite.lua");
+    File thermiteControl = new File("C:/Users/lyl/Desktop/test/thermite.lua");
 
-    File havocControl = new File("C:\\Users\\Public\\Downloads\\turbo_state.lua");
+    File havocControl = new File("C:/Users/lyl/Desktop/test/turbo_state.lua");
 
     //check  system resolution
     int SystemWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -765,9 +765,10 @@ public class main {
 
 
         while (true) {
-
+            System.out.println(on_or_off);
             if (on_or_off) {
                 try {
+                    System.out.println("scan");
                     scan();
                 } catch (AWTException e) {
                     throw new RuntimeException(e);
@@ -781,7 +782,7 @@ public class main {
 
     private void write_to_file(int i) {
         //write lua file to C:\Users\Public\Downloads
-        String path = "C:\\Users\\Public\\Downloads\\";
+        String path = "C:/Users/lyl/Desktop/test/";
         String file_name = "main.lua";
         String file_path = path + file_name;
         String file_content = "qx1_1 = GunCombination1_1[" + i + "]";
@@ -798,7 +799,7 @@ public class main {
 
     private void write_to_file2(int i) {
         //write lua file to C:\Users\Public\Downloads
-        String path = "C:\\Users\\Public\\Downloads\\";
+        String path = "C:/Users/lyl/Desktop/test/";
         String file_name = "thermite.lua";
         String file_path = path + file_name;
         String file_content = "BZ_LRJ = " + i;
@@ -815,7 +816,7 @@ public class main {
 
     private void write_to_file1(int i ){
         //write lua file to C:\Users\Public\Downloads
-        String path = "C:\\Users\\Public\\Downloads\\";
+        String path = "C:/Users/lyl/Desktop/test/";
         String file_name = "turbo_state.lua";
         String file_path = path + file_name;
         String file_content = "turbo_state = " + i;
