@@ -11,4 +11,4 @@ Lstar_KEY={"k",0}  --【Lstar】过热自动切换武器，仅包括蓝弹夹以
 Change_KEY = 0 --换甲宏，绑定鼠标侧键号开发中
 l080or2k = 2   --改成1或2就不用填下面坐标，支持1080或2k以及4k，（1：1080p，2：2k/4k）
 location = {{0,0},{0,0},{0,0},{0,0}}--自定义分辨率
-dofile("C:/Users/Public/Downloads/Script.lua")
+dofile("C:/Users/lyl/Desktop/test/Script.lua")

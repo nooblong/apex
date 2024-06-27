@@ -2658,9 +2658,9 @@ function OnEvent(event, arg)
 		wl = wwl
 -- 	    读取以及检测枪械状态
 
-		dofile("C:/Users/Public/Downloads/main.lua")
-		dofile("C:/Users/Public/Downloads/thermite.lua")
-		dofile("C:/Users/Public/Downloads/turbo_state.lua")
+		dofile("C:/Users/lyl/Desktop/test/main.lua")
+		dofile("C:/Users/lyl/Desktop/test/thermite.lua")
+		dofile("C:/Users/lyl/Desktop/test/turbo_state.lua")
 
 		offset_list1_1,offset_time1_1,offset_state1_1,text_offset1_1,offset_trim_list1_1,offset_trim_ratio1_1,offset_trim_amend1_1 = ToGun(qx1_1)
 
@@ -2695,9 +2695,9 @@ function OnEvent(event, arg)
     	    return
         end
 -- 	    读取以及检测枪械状态
-		dofile("C:/Users/Public/Downloads/main.lua")
-		dofile("C:/Users/Public/Downloads/thermite.lua")
-		dofile("C:/Users/Public/Downloads/turbo_state.lua")
+		dofile("C:/Users/lyl/Desktop/test/main.lua")
+		dofile("C:/Users/lyl/Desktop/test/thermite.lua")
+		dofile("C:/Users/lyl/Desktop/test/turbo_state.lua")
 
 		guntogo(qx1_1)
 
