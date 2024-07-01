@@ -569,16 +569,29 @@ public class main {
 
 
         //release script file to local
-        //            copyFile(from, to);
-        write_to_file(18); // 123.lua
-        write_to_file2(0); // thermite.lua
-        write_to_file1(0); // turbo_state.lua
-        //disable button
-        release.setEnabled(false);
-        //show message
-        //JOptionPane.showMessageDialog(frame, "脚本文件已释放到本地,Script File Released to Local path");
-        release.setText("脚本文件OK");
-        release.setBackground(Color.green);
+        try {
+            copyFile(from, to);
+            write_to_file(18); // 123.lua
+            write_to_file2(0); // thermite.lua
+            write_to_file1(0); // turbo_state.lua
+            //disable button
+            release.setEnabled(false);
+            //show message
+            //JOptionPane.showMessageDialog(frame, "脚本文件已释放到本地,Script File Released to Local path");
+            release.setText("脚本文件OK");
+            release.setBackground(Color.green);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+            //show message
+            JOptionPane.showMessageDialog(frame, "脚本文件释放失败,Script File Release Failed");
+            release.setBackground(Color.red);
+            //disable all button
+            button1.setEnabled(false);
+            mute.setEnabled(false);
+            release.setEnabled(false);
+            button3.setEnabled(false);
+            button4.setEnabled(false);
+        }
 
 
         //pop up message when start the program
