@@ -27,7 +27,7 @@ public class main {
     boolean on_or_off = false;
     boolean isMute = true;
     String gun = "杜绝收费，从你我做起,GitHub点点星星，谢谢";
-    File from = new File("C:/Users/lyl/Desktop/test/Script.lua");
+    File from = new File("C:/Users/lyl/Documents/GitHub/apex/Script.lua");
     File to = new File("C:/Users/lyl/Desktop/test/Script.lua");
 
     File control = new File("C:/Users/lyl/Desktop/test/main.lua");
