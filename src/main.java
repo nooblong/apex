@@ -433,7 +433,7 @@ public class main {
         //change gun colour
         gun.setForeground(Color.blue);
         //always on top
-        frame.setAlwaysOnTop(true);
+        frame.setAlwaysOnTop(false);
 
         panel1.add(gun);
         panel1.add(button1);
