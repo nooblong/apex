@@ -75,7 +75,7 @@ public class main {
     boolean[] booleanArray = new boolean[23];
 
     boolean lgs =false;
-    boolean ghub =true;
+    boolean ghub =false;
 
     String[] gunNames = {
             "<html><center>R301 single<br>301卡宾枪单点<br></center></html>",
@@ -163,35 +163,35 @@ public class main {
         JPanel gunPanel = new JPanel();
         gunPanel.setLayout(new GridLayout(0, 3)); // Adjust the grid layout columns as needed
 
-        booleanArray[0] = false; // r301_single
+        booleanArray[0] = true; // r301_single
         booleanArray[1] = true; // r301
         booleanArray[2] = true; // vk
 
-        booleanArray[3] = false; // vk_single
+        booleanArray[3] = true; // vk_single
         booleanArray[4] = true; // alternator
         booleanArray[5] = true; // car
 
-        booleanArray[6] = false; // p2020
-        booleanArray[7] = false; // devotion
-        booleanArray[8] = false; // havoc
+        booleanArray[6] = true; // p2020
+        booleanArray[7] = true; // devotion
+        booleanArray[8] = true; // havoc
 
-        booleanArray[9] = false; // g7
+        booleanArray[9] = true; // g7
         booleanArray[10] = true; // re45
         booleanArray[11] = true; // lstar
 
-        booleanArray[12] = false; // wingman
+        booleanArray[12] = true; // wingman
         booleanArray[13] = true; // m600
-        booleanArray[14] = false; // rampage
+        booleanArray[14] = true; // rampage
 
-        booleanArray[15] = false; // prowlerBurstPDW_burst
+        booleanArray[15] = true; // prowlerBurstPDW_burst
         booleanArray[16] = true; // volt
-        booleanArray[17] = false; // r99
+        booleanArray[17] = true; // r99
 
-        booleanArray[18] = false; // hemlock_single
-        booleanArray[19] = false; // revengeGoddess
-        booleanArray[20] = false; // prowlerBurstPDW_auto
+        booleanArray[18] = true; // hemlock_single
+        booleanArray[19] = true; // revengeGoddess
+        booleanArray[20] = true; // prowlerBurstPDW_auto
 
-        booleanArray[21] = false; // hemlock——burst
+        booleanArray[21] = true; // hemlock——burst
 
 
 //        create button for each gun
@@ -621,37 +621,37 @@ public class main {
                 """;
         Object[] options = {"LGS", "GHub"};
 
-//        int n = JOptionPane.showOptionDialog(
-//                frame,
-//                message,
-//                "Game Settings",
-//                JOptionPane.YES_NO_OPTION,
-//                JOptionPane.QUESTION_MESSAGE,
-//                null,
-//                options,
-//                options[0]  // default option
-//        );
-//
-//        if (n == JOptionPane.YES_OPTION) {
-//            System.out.println("LGS selected");
-//            lgs = true;
-//            ghub = false;
-//        } else if (n == JOptionPane.NO_OPTION) {
-//            System.out.println("GHub selected");
-//            ghub = true;
-//            lgs = false;
-//
-//            for (int i = 0 ; i < booleanArray.length; i++){
-//                if (i%3 == 0){
-//                    booleanArray[i] = false;
-//                    gunButtons[i].setBackground(Color.red);
-//                    gunButtons[i].setEnabled(false);
-//                }
-//            }
-//
-//
-//
-//        }
+        int n = JOptionPane.showOptionDialog(
+                frame,
+                message,
+                "Game Settings",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]  // default option
+        );
+
+        if (n == JOptionPane.YES_OPTION) {
+            System.out.println("LGS selected");
+            lgs = true;
+            ghub = false;
+        } else if (n == JOptionPane.NO_OPTION) {
+            System.out.println("GHub selected");
+            ghub = true;
+            lgs = false;
+
+            for (int i = 0 ; i < booleanArray.length; i++){
+                if (i%3 == 0){
+                    booleanArray[i] = false;
+                    gunButtons[i].setBackground(Color.red);
+                    gunButtons[i].setEnabled(false);
+                }
+            }
+
+
+
+        }
 
 
         button1.addActionListener(e -> {
@@ -765,8 +765,10 @@ public class main {
 
 
         while (true) {
+            System.out.println(on_or_off);
             if (on_or_off) {
                 try {
+                    System.out.println("scan");
                     scan();
                 } catch (AWTException e) {
                     throw new RuntimeException(e);
