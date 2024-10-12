@@ -433,7 +433,7 @@ public class main {
         //change gun colour
         gun.setForeground(Color.blue);
         //always on top
-        frame.setAlwaysOnTop(true);
+        frame.setAlwaysOnTop(false);
 
         panel1.add(gun);
         panel1.add(button1);
@@ -621,16 +621,17 @@ public class main {
                 """;
         Object[] options = {"LGS", "GHub"};
 
-        int n = JOptionPane.showOptionDialog(
-                frame,
-                message,
-                "Game Settings",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]  // default option
-        );
+//        int n = JOptionPane.showOptionDialog(
+//                frame,
+//                message,
+//                "Game Settings",
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.QUESTION_MESSAGE,
+//                null,
+//                options,
+//                options[0]  // default option
+//        );
+        int n = JOptionPane.NO_OPTION;
 
         if (n == JOptionPane.YES_OPTION) {
             System.out.println("LGS selected");
@@ -765,12 +766,16 @@ public class main {
 
 
         while (true) {
-            System.out.println(on_or_off);
             if (on_or_off) {
                 try {
-                    System.out.println("scan");
                     scan();
                 } catch (AWTException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -882,8 +887,10 @@ public class main {
             try {
                 Robot robot = new Robot();
 
+                System.out.println("snapshot");
+                Thread.sleep(500);
                 BufferedImage image = robot.createScreenCapture(new Rectangle(x, y, width, height)); //capture weapon area
-                BufferedImage dead = robot.createScreenCapture(new Rectangle(x1, y1, width1, height1)); //capture the death box area
+//                BufferedImage dead = robot.createScreenCapture(new Rectangle(x1, y1, width1, height1)); //capture the death box area
 
                 // Process the image to keep only the parts you want
                 for (int y = 0; y < image.getHeight(); y++) {
@@ -895,19 +902,19 @@ public class main {
                     }
                 }
                 // Process the image to keep only the parts you want
-                for (int y = 0; y < dead.getHeight(); y++) {
-                    for (int x = 0; x < dead.getWidth(); x++) {
-                        int pixel = dead.getRGB(x, y);
-                        int grayValue = (pixel >> 16) & 0xff; // Extract the red component as the grayscale value
-                        int newPixel = (grayValue > threshold) ? pixel : 0; // Set black for unwanted parts
-                        dead.setRGB(x, y, newPixel);
-                    }
-                }
+//                for (int y = 0; y < dead.getHeight(); y++) {
+//                    for (int x = 0; x < dead.getWidth(); x++) {
+//                        int pixel = dead.getRGB(x, y);
+//                        int grayValue = (pixel >> 16) & 0xff; // Extract the red component as the grayscale value
+//                        int newPixel = (grayValue > threshold) ? pixel : 0; // Set black for unwanted parts
+//                        dead.setRGB(x, y, newPixel);
+//                    }
+//                }
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 ByteArrayOutputStream byteArrayOutputStream1 = new ByteArrayOutputStream();
 
                 ImageIO.write(image, "png", byteArrayOutputStream);
-                ImageIO.write(dead, "png", byteArrayOutputStream1);
+//                ImageIO.write(dead, "png", byteArrayOutputStream1);
 
 //                debug checking
 //                ImageIO.write(image, "png", new File("weapon_area.png"));
@@ -915,31 +922,34 @@ public class main {
 
                 //to byte array
                 byte[] weaponArea = byteArrayOutputStream.toByteArray();
-                byte[] deadArea = byteArrayOutputStream1.toByteArray();
+//                byte[] deadArea = byteArrayOutputStream1.toByteArray();
 
                 // convert to opencv mat
                 MatOfByte matOfByte = new MatOfByte(weaponArea);
-                MatOfByte matOfByte1 = new MatOfByte(deadArea);
+//                MatOfByte matOfByte1 = new MatOfByte(deadArea);
                 _1weapon = Imgcodecs.imdecode(matOfByte,Imgcodecs.IMREAD_UNCHANGED);
-                _2dead = Imgcodecs.imdecode(matOfByte1,Imgcodecs.IMREAD_UNCHANGED);
+//                _2dead = Imgcodecs.imdecode(matOfByte1,Imgcodecs.IMREAD_UNCHANGED);
 
             } catch (IOException | AWTException e) {
                 //pop up window to tell user to run as admin
                 JOptionPane.showMessageDialog(null, "图片截图失败,请以管理员身份运行程序,并在GitHub上提出bug", "Error", JOptionPane.ERROR_MESSAGE);
                 throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
 
 
 //            check if the player is looting a dead chest
-            if (imageDetection(_2dead,"dead",false) >= deadConfidence) {
-                this.gun = "Dead";
-                gunMode = 18;
-                switchNow();
-            } else if ( imageDetection(_2dead,"blackMarket",false) >= deadConfidence){
-                this.gun = "Black Market";
-                gunMode = 18;
-                switchNow();
-            } else if (imageDetection(_1weapon,"r99",false) >= confidence && r99) {
+//            if (imageDetection(_2dead,"dead",false) >= deadConfidence) {
+//                this.gun = "Dead";
+//                gunMode = 18;
+//                switchNow();
+//            } else if ( imageDetection(_2dead,"blackMarket",false) >= deadConfidence){
+//                this.gun = "Black Market";
+//                gunMode = 18;
+//                switchNow();
+//            } else
+                if (imageDetection(_1weapon,"r99",false) >= confidence && r99) {
                 this.gun = "R-99 SMG";
                 gunMode = 1;
                 switchNow();
