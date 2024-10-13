@@ -998,17 +998,17 @@ public class main {
                 this.gun = "RE_45 Auto";
                 gunMode = 13;
                 switchNow();
-            } else if (imageDetection(_1weapon,"rampageLMG",false) >= confidence && rampage) {
-                gunMode = 19;
-                switchNow();
-                if (imageDetection(_1weapon,"thermite",false) >= confidence ) {
-                    this.gun = "Rampage LMG + Thermite";
-                    write_to_file2(1);
-                    System.out.println("Thermite");
-                }else {
-                    this.gun = "Rampage LMG";
-                    write_to_file2(0);
-                }
+//            } else if (imageDetection(_1weapon,"rampageLMG",false) >= confidence && rampage) {
+//                gunMode = 19;
+//                switchNow();
+//                if (imageDetection(_1weapon,"thermite",false) >= confidence ) {
+//                    this.gun = "Rampage LMG + Thermite";
+//                    write_to_file2(1);
+//                    System.out.println("Thermite");
+//                }else {
+//                    this.gun = "Rampage LMG";
+//                    write_to_file2(0);
+//                }
             } else if (imageDetection(_1weapon,"p2020",false) >= confidence && p2020) {
                 this.gun = "P2020";
                 gunMode = 9;
