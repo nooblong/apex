@@ -17,24 +17,29 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.awt.event.KeyEvent;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import javax.swing.JOptionPane;
 
 public class main {
     String version = "6.6.0";
+    String basePath = "C:/Users/liyinlong/Desktop/test/";
+    String fromPath = "C:/Users/liyinlong/Documents/GitHub/apex/Script.lua";
     int machMethod = Imgproc.TM_CCOEFF_NORMED;
     int gunMode = 18;//marco pause
     int tempGunMode = 0;
     boolean on_or_off = false;
     boolean isMute = true;
     String gun = "杜绝收费，从你我做起,GitHub点点星星，谢谢";
-    File from = new File("C:/Users/lyl/Documents/GitHub/apex/Script.lua");
-    File to = new File("C:/Users/lyl/Desktop/test/Script.lua");
+    File from = new File(fromPath);
+    File to = new File(basePath + "Script.lua");
 
-    File control = new File("C:/Users/lyl/Desktop/test/main.lua");
+    File control = new File(basePath + "main.lua");
 
-    File thermiteControl = new File("C:/Users/lyl/Desktop/test/thermite.lua");
+    File thermiteControl = new File(basePath + "thermite.lua");
 
-    File havocControl = new File("C:/Users/lyl/Desktop/test/turbo_state.lua");
+    File havocControl = new File(basePath + "turbo_state.lua");
 
     //check  system resolution
     int SystemWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -781,7 +786,7 @@ public class main {
 
     private void write_to_file(int i) {
         //write lua file to C:\Users\Public\Downloads
-        String path = "C:/Users/lyl/Desktop/test/";
+        String path = basePath;
         String file_name = "main.lua";
         String file_path = path + file_name;
         String file_content = "qx1_1 = GunCombination1_1[" + i + "]";
@@ -798,7 +803,7 @@ public class main {
 
     private void write_to_file2(int i) {
         //write lua file to C:\Users\Public\Downloads
-        String path = "C:/Users/lyl/Desktop/test/";
+        String path = basePath;
         String file_name = "thermite.lua";
         String file_path = path + file_name;
         String file_content = "BZ_LRJ = " + i;
@@ -815,7 +820,7 @@ public class main {
 
     private void write_to_file1(int i ){
         //write lua file to C:\Users\Public\Downloads
-        String path = "C:/Users/lyl/Desktop/test/";
+        String path = basePath;
         String file_name = "turbo_state.lua";
         String file_path = path + file_name;
         String file_content = "turbo_state = " + i;
@@ -831,6 +836,12 @@ public class main {
     }
 
     private void copyFile(File source, File destination) throws IOException {
+        if (!destination.getParentFile().exists()) {
+            destination.getParentFile().mkdir();
+        }
+        if (!destination.exists()) {
+            destination.createNewFile();
+        }
         try (InputStream inputStream = new FileInputStream(source);
              OutputStream outputStream = new FileOutputStream(destination)) {
             byte[] buffer = new byte[4096];
@@ -1291,6 +1302,23 @@ public class main {
 
     //run the program
     public static void main(String[] args) {
+        try {
+            InputStream dllInput = main.class.getResourceAsStream("opencv_java460.dll");
+            if (dllInput == null) {
+                throw new FileNotFoundException("DLL file not found in native folder");
+            }
+
+            Path tempDllPath = Files.createTempFile("opencv_java460.dll", "");
+            System.out.println("copy to : " + tempDllPath.toAbsolutePath().toString());
+            Files.copy(dllInput, tempDllPath, StandardCopyOption.REPLACE_EXISTING);
+            dllInput.close();
+
+            System.load(tempDllPath.toAbsolutePath().toString());
+
+            tempDllPath.toFile().deleteOnExit();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load DLL", e);
+        }
         new main();
     }
 
