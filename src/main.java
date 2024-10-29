@@ -25,8 +25,8 @@ import javax.swing.JOptionPane;
 
 public class main {
     String version = "6.6.0";
-    static String basePath = "C:/Users/liyinlong/Desktop/test/";
-    static String fromPath = "C:/Users/liyinlong/Documents/GitHub/apex/Script.lua";
+    static String basePath = "C:/Users/lyl/Desktop/test/";
+    static String fromPath = "C:/Users/lyl/Documents/GitHub/apex/Script.lua";
     int machMethod = Imgproc.TM_CCOEFF_NORMED;
     int gunMode = 18;//marco pause
     int tempGunMode = 0;
