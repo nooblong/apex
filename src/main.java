@@ -737,18 +737,7 @@ public class main {
             height1 = (int) (SystemHeight /6);
         }
 
-        //auto trigger to ensure the num lock is on for macro to work
-        boolean isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_NUM_LOCK);
-        if (isOn) {
-            System.out.println("Numlock is on");
-        } else {
-            System.out.println("Numlock is off");
-            //turn on numlock
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            toolkit.setLockingKeyState(KeyEvent.VK_NUM_LOCK, Boolean.TRUE);
 
-            System.out.println("Numlock is now turn on");
-        }
 
 //        System.out.println(SystemWidth + " " + SystemHeight);
 
@@ -774,6 +763,11 @@ public class main {
                 }
             } else {
                 try {
+                    boolean isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_NUM_LOCK);
+                    if (isOn) {
+                        System.out.println("Numlock is on");
+                        on_or_off = true;
+                    }
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -885,6 +879,12 @@ public class main {
 
             // create robot to capture screen in specific area with parameters from above
             try {
+                //auto trigger to ensure the num lock is on for macro to work
+                boolean isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_NUM_LOCK);
+                if (!isOn) {
+                    System.out.println("Numlock is off");
+                    on_or_off = false;
+                }
                 Robot robot = new Robot();
 
                 System.out.println("snapshot");
