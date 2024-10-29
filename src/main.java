@@ -19,13 +19,14 @@ import java.net.URL;
 import java.awt.event.KeyEvent;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import javax.swing.JOptionPane;
 
 public class main {
     String version = "6.6.0";
-    String basePath = "C:/Users/liyinlong/Desktop/test/";
-    String fromPath = "C:/Users/liyinlong/Documents/GitHub/apex/Script.lua";
+    static String basePath = "C:/Users/liyinlong/Desktop/test/";
+    static String fromPath = "C:/Users/liyinlong/Documents/GitHub/apex/Script.lua";
     int machMethod = Imgproc.TM_CCOEFF_NORMED;
     int gunMode = 18;//marco pause
     int tempGunMode = 0;
@@ -119,7 +120,7 @@ public class main {
 
     public main() {
         GitHubReleaseChecker ();
-        checkForUpdates(latestVersion);
+//        checkForUpdates(latestVersion);
 
 
         //scanner config file for gun mode
@@ -1302,23 +1303,24 @@ public class main {
 
     //run the program
     public static void main(String[] args) {
-        try {
-            InputStream dllInput = main.class.getResourceAsStream("opencv_java460.dll");
-            if (dllInput == null) {
-                throw new FileNotFoundException("DLL file not found in native folder");
-            }
-
-            Path tempDllPath = Files.createTempFile("opencv_java460.dll", "");
-            System.out.println("copy to : " + tempDllPath.toAbsolutePath().toString());
-            Files.copy(dllInput, tempDllPath, StandardCopyOption.REPLACE_EXISTING);
-            dllInput.close();
-
-            System.load(tempDllPath.toAbsolutePath().toString());
-
-            tempDllPath.toFile().deleteOnExit();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load DLL", e);
-        }
+        // start with: -Djava.library.path=C:/Users/liyinlong/Documents/GitHub/apex
+//        try {
+//            InputStream dllInput = main.class.getResourceAsStream("opencv_java460.dll");
+//            if (dllInput == null) {
+//                throw new FileNotFoundException("DLL file not found in native folder");
+//            }
+//
+//            Path tempDllPath = Files.createTempFile("opencv_java460.dll", "");
+//            System.out.println("copy to : " + tempDllPath.toAbsolutePath().toString());
+//            Files.copy(dllInput, tempDllPath, StandardCopyOption.REPLACE_EXISTING);
+//            dllInput.close();
+//
+//            System.load(tempDllPath.toAbsolutePath().toString());
+//
+//            tempDllPath.toFile().deleteOnExit();
+//        } catch (IOException e) {
+//            throw new RuntimeException("Failed to load DLL", e);
+//        }
         new main();
     }
 
