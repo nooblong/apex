@@ -30,7 +30,7 @@ public class main {
     int machMethod = Imgproc.TM_CCOEFF_NORMED;
     int gunMode = 18;//marco pause
     int tempGunMode = 0;
-    boolean on_or_off = false;
+    volatile boolean on_or_off = false;
     boolean isMute = true;
     String gun = "杜绝收费，从你我做起,GitHub点点星星，谢谢";
     File from = new File(fromPath);
@@ -238,6 +238,37 @@ public class main {
 //        System.out.println(gunButtons[1]);
 
 
+        new Thread(() -> {
+            while (true) {
+                on_or_off = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_NUM_LOCK);
+                if (on_or_off) {
+                    System.out.println("start");
+                    button1.setBackground(Color.GREEN);
+                    for (JButton gunButton : gunButtons) {
+                        gunButton.setEnabled(false);
+                    }
+                } else {
+                    System.out.println("stop");
+                    button1.setBackground(Color.RED);
+                    for (int i = 0; i < gunButtons.length; i++) {
+                        if (ghub) {
+                            if (i % 3 == 0) {
+                                continue;
+                            }
+                        }
+                        gunButtons[i].setEnabled(true);
+                    }
+                    this.gun = "关闭成功，Turned off";
+                    this.gunMode = 18;
+                    switchNow();
+                }
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
 
         wrapper.add(gunPanel); // Add the gunPanel to the wrapper panel
 
@@ -759,7 +790,6 @@ public class main {
 //        // Attach the mouse scroll listener to the panel
 //        addMouseScrollListener(panel1, scrollConsumer);
 
-
         while (true) {
             if (on_or_off) {
                 try {
@@ -769,11 +799,6 @@ public class main {
                 }
             } else {
                 try {
-                    boolean isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_NUM_LOCK);
-                    if (isOn) {
-                        System.out.println("Numlock is on");
-                        on_or_off = true;
-                    }
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -892,11 +917,6 @@ public class main {
             // create robot to capture screen in specific area with parameters from above
             try {
                 //auto trigger to ensure the num lock is on for macro to work
-                boolean isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_NUM_LOCK);
-                if (!isOn) {
-                    System.out.println("Numlock is off");
-                    on_or_off = false;
-                }
                 Robot robot = new Robot();
 
                 System.out.println("snapshot");
