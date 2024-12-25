@@ -179,7 +179,7 @@ public class main {
 
         booleanArray[6] = true; // p2020
         booleanArray[7] = true; // devotion
-        booleanArray[8] = true; // havoc
+        booleanArray[8] = false; // havoc
 
         booleanArray[9] = true; // g7
         booleanArray[10] = true; // re45
@@ -229,6 +229,11 @@ public class main {
                         gunButtons[index].setBackground(Color.red);
                     }
                 });
+                if (booleanArray[i]){
+                    gunButtons[i].setBackground(Color.GREEN);
+                } else {
+                    gunButtons[i].setBackground(Color.red);
+                }
 
             }
             // Add the button to the panel
