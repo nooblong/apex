@@ -756,27 +756,27 @@ public class main {
             System.out.println("1440p x 3440p");
             x1 = (550);
             y1 = (100);
-            width1 = 200;
-            height1 = 100;
+            width1 = 200*3;
+            height1 = 100*3;
         }else if (SystemWidth == 2560 && SystemHeight == 1440) {
             System.out.println("1440p x 2560p");
             //capture for looting area
             x1 = (SystemWidth / 16);
             y1 = (SystemHeight / 10);
-            width1 = (int) (SystemWidth / 8.5) - x1;
-            height1 = (int) ((SystemHeight / 8.5) - y1) * 2;
+            width1 = (int) (SystemWidth / 8.5 *3) - x1;
+            height1 = (int) ((SystemHeight / 8.5 *3) - y1) * 2;
         } else if (SystemHeight == 1600 && SystemWidth == 2560) {
             System.out.println("1600p x 2560p");
             x1 = (100);
             y1 = (100);
-            width1 = (int)(SystemWidth/ 5);
-            height1 = (int) (SystemHeight /6);
+            width1 = (int)(SystemWidth/ 5 *3);
+            height1 = (int) (SystemHeight /6*3);
         } else {
             System.out.println("其他分辨率/1080p");
             x1 = (100);
             y1 = (100);
-            width1 = (int)(SystemWidth/ 5);
-            height1 = (int) (SystemHeight /6);
+            width1 = (int)(SystemWidth/ 5*3);
+            height1 = (int) (SystemHeight /6*3);
         }
 
 
